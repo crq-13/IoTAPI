@@ -31,10 +31,17 @@ class DoorServices:
 
     # Funcion de sonar para actualizar la ultima lectura de cada nodo
     def sonar(self, nodo_id):
-        fecha = datetime.now()
-        # convertir de utc a zona horaria de colombia
-        fecha = fecha.astimezone()
+        # Obtener la fecha y hora actual en UTC
+        fecha_utc = datetime.now(pytz.utc)
+
+        # Definir la zona horaria de Colombia
+        zona_horaria_colombia = pytz.timezone('America/Bogota')
+
+        # Convertir la fecha y hora a la zona horaria de Colombia
+        fecha_colombia = fecha_utc.astimezone(zona_horaria_colombia)
+
         # formato de fecha
-        fecha = fecha.strftime("%Y-%m-%d %H:%M:%S")
-        self.nodosProvider.update_last_signal(nodo_id, fecha)
+        fecha_colombia = fecha_colombia.strftime("%Y-%m-%d %H:%M:%S")
+        print(fecha_colombia)
+        self.nodosProvider.update_last_signal(nodo_id, fecha_colombia)
         return {"message": "Last signal updated"}
