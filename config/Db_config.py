@@ -11,7 +11,7 @@ namedb = EnvConfig.DB_DATABASE
 port = EnvConfig.DB_PORT
 
 
-# url to conect to the databse sioma_app
+# url to conect to the databse
 database_url = f"mysql+pymysql://{user}:{pwd}@" \
     f"{host}:{port}/{namedb}"
 
